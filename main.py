@@ -303,7 +303,6 @@ def ai_assistant():
     if request.method == 'POST':
         query = request.form.get('query', '').strip()
         
-        # Securely fetch the API key from environment variables (configured in Railway)
         gemini_key = os.getenv('GEMINI_API_KEY')
         
         if gemini_key:
@@ -314,7 +313,8 @@ def ai_assistant():
                         "parts": [{"text": f"You are an expert global trade and customs compliance AI assistant. Provide actionable guidance for this trade query: {query}"}]
                     }]
                 }
-                api_res = requests.post(url, json=payload, timeout=8)
+                # Timeout extended to 30 seconds to prevent read timeouts
+                api_res = requests.post(url, json=payload, timeout=30)
                 if api_res.status_code == 200:
                     data = api_res.json()
                     response_text = data['candidates'][0]['content']['parts'][0]['text']

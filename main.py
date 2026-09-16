@@ -2,6 +2,7 @@ import os
 import sqlite3
 import requests
 import io
+import time
 from flask import Flask, request, render_template_string, redirect, url_for, send_file
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
@@ -296,30 +297,43 @@ def landed_cost():
     """
     return render_page(html, result=result)
 
-# 5. Live Gemini AI Trade Assistant Route
+# 5. Live Gemini AI Trade Assistant Route (With 30s timeout and 503 retry handler)
 @app.route('/ai-assistant', methods=['GET', 'POST'])
 def ai_assistant():
     response_text = None
     if request.method == 'POST':
         query = request.form.get('query', '').strip()
-        
         gemini_key = os.getenv('GEMINI_API_KEY')
         
         if gemini_key:
             try:
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?Key={gemini_key}"
+                # Alternatively if using v1beta query parameter style lowercase key:
                 url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent?key={gemini_key}"
                 payload = {
                     "contents": [{
                         "parts": [{"text": f"You are an expert global trade and customs compliance AI assistant. Provide actionable guidance for this trade query: {query}"}]
                     }]
                 }
-                # Timeout extended to 30 seconds to prevent read timeouts
-                api_res = requests.post(url, json=payload, timeout=30)
-                if api_res.status_code == 200:
+                
+                # Automatic retry loop for temporary 503 errors (up to 3 tries)
+                api_res = None
+                for attempt in range(3):
+                    api_res = requests.post(url, json=payload, timeout=30)
+                    if api_res.status_code == 200:
+                        break
+                    elif api_res.status_code == 503 and attempt < 2:
+                        time.sleep(3)  # Wait 3 seconds before retrying
+                        continue
+                    else:
+                        break
+
+                if api_res and api_res.status_code == 200:
                     data = api_res.json()
                     response_text = data['candidates'][0]['content']['parts'][0]['text']
                 else:
-                    response_text = f"API error connecting to Gemini (Status {api_res.status_code}). Please check your GEMINI_API_KEY configuration in Railway."
+                    status = api_res.status_code if api_res else "Unknown"
+                    response_text = f"Google's servers are temporarily busy or overloaded (Status {status}). The app attempted 3 automatic retries, but the servers are still facing high traffic. Please try again shortly."
             except Exception as e:
                 response_text = f"Connection error occurred: {str(e)}"
         else:

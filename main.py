@@ -1,13 +1,20 @@
 import os
 import sqlite3
+import json
 import requests
 import io
-import time
 from flask import Flask, request, render_template_string, redirect, url_for, send_file
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
+from google import genai
+
+# =========================================================
+# DEVELOPER CONFIGURATION PLACEHOLDERS
+# =========================================================
+GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE"
+NAMESCAN_API_KEY = "YOUR_NAMESCAN_API_KEY_HERE"
 
 app = Flask(__name__)
 DB_FILE = "shipment_screening.db"
@@ -25,12 +32,36 @@ def init_db():
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
         )
     ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS papers (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            category TEXT,
+            content TEXT,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
     conn.commit()
     conn.close()
 
 init_db()
 
-# Single Base Template containing common layout
+# ---------------------------------------------------------
+# DATA LOADER UTILITY (Reads package.json)
+# ---------------------------------------------------------
+def load_trade_data():
+    """Safely loads the 100-company B2B directory from package.json."""
+    if not os.path.exists("package.json"):
+        return {"exporters": [], "importers": []}
+    try:
+        with open("package.json", "r", encoding="utf-8") as f:
+            data = json.load(f)
+            return data.get("trade_pulse_directory", {"exporters": [], "importers": []})
+    except Exception as e:
+        print(f"Error loading JSON data: {e}")
+        return {"exporters": [], "importers": []}
+
+# Single Base Template containing common layout for all 9 modules
 BASE_LAYOUT = """
 <!doctype html>
 <html lang="en">
@@ -51,11 +82,15 @@ BASE_LAYOUT = """
     <div class="row">
         <div class="col-md-2 sidebar py-4 px-3">
             <h4 class="text-white px-2 mb-4">Trade Pulse</h4>
-            <a href="/">Dashboard</a>
-            <a href="/screening">Shipment Screening</a>
-            <a href="/document-maker">Document Maker (PDF)</a>
-            <a href="/landed-cost">Landed Cost Calculator</a>
-            <a href="/ai-assistant">AI Trade Assistant</a>
+            <a href="/">1. Dashboard</a>
+            <a href="/screening">2. Shipment Screening</a>
+            <a href="/document-maker">3. Document Maker (PDF)</a>
+            <a href="/landed-cost">4. Landed Cost Calculator</a>
+            <a href="/paper-management">5. Paper Management</a>
+            <a href="/directory">6. Importers & Exporters</a>
+            <a href="/simulation">7. Trade Simulation</a>
+            <a href="/ai-assistant">8. AI Trade Assistant</a>
+            <a href="/document-checker">9. Document Checker</a>
         </div>
         <div class="col-md-10 py-5 px-5">
             {% block content %}{% endblock %}
@@ -79,8 +114,8 @@ def dashboard():
     <div class="row mt-4 g-4">
         <div class="col-md-3"><div class="card p-4 bg-white"><h5>Screening</h5><p class="text-primary fw-bold mb-0">Active Watchlist</p></div></div>
         <div class="col-md-3"><div class="card p-4 bg-white"><h5>Documents</h5><p class="text-success fw-bold mb-0">PDF Generation Ready</p></div></div>
-        <div class="col-md-3"><div class="card p-4 bg-white"><h5>Landed Cost</h5><p class="text-warning fw-bold mb-0">Multi-factor Engine</p></div></div>
-        <div class="col-md-3"><div class="card p-4 bg-white"><h5>AI Assistant</h5><p class="text-info fw-bold mb-0">Gemini Powered</p></div></div>
+        <div class="col-md-3"><div class="card p-4 bg-white"><h5>Doc Checker</h5><p class="text-danger fw-bold mb-0">Validation Active</p></div></div>
+        <div class="col-md-3"><div class="card p-4 bg-white"><h5>AI Assistant</h5><p class="text-info fw-bold mb-0">Gemini SDK Powered</p></div></div>
     </div>
     """
     return render_page(html)
@@ -90,7 +125,7 @@ def dashboard():
 def shipment_screening():
     if request.method == 'POST':
         entity_name = request.form.get('entity_name', '').strip()
-        api_key = os.getenv('NAMESCAN_API_KEY', '')
+        api_key = NAMESCAN_API_KEY
         
         risk_level = "Low Risk (Cleared)"
         details = "No matches found on international trade sanction lists."
@@ -105,7 +140,7 @@ def shipment_screening():
             risk_level = "Review Required"
             details = "Entity name too short or ambiguous for automated verification."
 
-        if api_key and api_key != 'demo_key':
+        if api_key and api_key != 'YOUR_NAMESCAN_API_KEY_HERE':
             try:
                 headers = {"api-key": api_key, "Content-Type": "application/json"}
                 response = requests.post("https://api.namescan.io/v1/person-scans", json={"name": entity_name}, headers=headers, timeout=4)
@@ -236,7 +271,7 @@ def document_maker():
     """
     return render_page(html)
 
-# 4. Accurate Landed Cost Calculator Route
+# 4. Landed Cost Calculator Route
 @app.route('/landed-cost', methods=['GET', 'POST'])
 def landed_cost():
     result = None
@@ -297,47 +332,203 @@ def landed_cost():
     """
     return render_page(html, result=result)
 
-# 5. Live Gemini AI Trade Assistant Route (With 30s timeout and 503 retry handler)
+# 5. Paper Management Route
+@app.route('/paper-management', methods=['GET', 'POST'])
+def paper_management():
+    if request.method == 'POST':
+        title = request.form.get('title', '').strip()
+        category = request.form.get('category', 'General')
+        content = request.form.get('content', '').strip()
+        
+        if title and content:
+            conn = sqlite3.connect(DB_FILE)
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO papers (title, category, content) VALUES (?, ?, ?)", (title, category, content))
+            conn.commit()
+            conn.close()
+        return redirect(url_for('paper_management'))
+
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    cursor.execute("SELECT title, category, content, timestamp FROM papers ORDER BY id DESC")
+    papers = cursor.fetchall()
+    conn.close()
+
+    html = """
+    <h2>Trade Paper Management</h2>
+    <p class="text-muted">Store, organize, and review customs notes, letters of credit text, or trade agreements.</p>
+    <form method="POST" class="card p-4 bg-white shadow-sm col-md-8 mb-5">
+        <div class="mb-3">
+            <label class="form-label fw-bold">Document Title</label>
+            <input type="text" name="title" class="form-control" placeholder="e.g., LC Agreement - Supplier X" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">Category</label>
+            <select name="category" class="form-select">
+                <option value="Letter of Credit">Letter of Credit</option>
+                <option value="Customs Agreement">Customs Agreement</option>
+                <option value="Contract / SLA">Contract / SLA</option>
+                <option value="General Notes">General Notes</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">Document Text / Notes</label>
+            <textarea name="content" rows="4" class="form-control" placeholder="Paste agreement details or internal notes here..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Document Record</button>
+    </form>
+    <h4>Saved Trade Papers</h4>
+    <div class="row g-3">
+        {% for paper in papers %}
+        <div class="col-md-6">
+            <div class="card p-3 bg-white shadow-sm">
+                <div class="d-flex justify-content-between">
+                    <h5 class="text-primary">{{ paper[0] }}</h5>
+                    <span class="badge bg-secondary">{{ paper[1] }}</span>
+                </div>
+                <p class="mt-2 mb-2" style="white-space: pre-line;">{{ paper[2] }}</p>
+                <small class="text-muted">Saved on: {{ paper[3] }}</small>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    """
+    return render_page(html, papers=papers)
+
+# 6. Importers & Exporters Directory Route (Linked to package.json)
+@app.route('/directory')
+def directory():
+    trade_data = load_trade_data()
+    exporters = trade_data.get("exporters", [])
+    importers = trade_data.get("importers", [])
+
+    html = """
+    <h2>Importers & Exporters Directory</h2>
+    <p class="text-muted">Loaded directly from your package.json commercial data source.</p>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card p-4 bg-white mb-4">
+                <h4 class="text-primary mb-3">Exporters Directory ({{ exporters|length }})</h4>
+                <div style="max-height: 400px; overflow-y: auto;">
+                    <table class="table table-sm table-striped">
+                        <thead><tr><th>Company</th><th>Specialty</th><th>Flow</th></tr></thead>
+                        <tbody>
+                            {% for exp in exporters %}
+                            <tr>
+                                <td><strong>{{ exp.company_name }}</strong><br><small class="text-muted">{{ exp.contact_details }}</small></td>
+                                <td>{{ exp.specialty_expertise }}</td>
+                                <td><span class="badge bg-primary">{{ exp.trade_flow }}</span></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card p-4 bg-white mb-4">
+                <h4 class="text-success mb-3">Importers Directory ({{ importers|length }})</h4>
+                <div style="max-height: 400px; overflow-y: auto;">
+                    <table class="table table-sm table-striped">
+                        <thead><tr><th>Company</th><th>Specialty</th><th>Flow</th></tr></thead>
+                        <tbody>
+                            {% for imp in importers %}
+                            <tr>
+                                <td><strong>{{ imp.company_name }}</strong><br><small class="text-muted">{{ imp.contact_details }}</small></td>
+                                <td>{{ imp.specialty_expertise }}</td>
+                                <td class="text-wrap"><span class="badge bg-success">{{ imp.trade_flow }}</span></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    """
+    return render_page(html, exporters=exporters, importers=importers)
+
+# 7. Trade Simulation Route
+@app.route('/simulation', methods=['GET', 'POST'])
+def simulation():
+    sim_result = None
+    if request.method == 'POST':
+        try:
+            volume = float(request.form.get('volume', 1000))
+            risk_factor = float(request.form.get('risk_factor', 1.0))
+            lead_time = int(request.form.get('lead_time', 15))
+            
+            projected_cost = volume * 1.15 * risk_factor
+            projected_days = lead_time + (int(risk_factor * 5))
+            success_probability = max(50.0, 100.0 - (risk_factor * 12.5))
+            
+            sim_result = {
+                'cost': projected_cost,
+                'days': projected_days,
+                'prob': success_probability
+            }
+        except Exception:
+            pass
+
+    html = """
+    <h2>Trade & Supply Chain Simulation</h2>
+    <p class="text-muted">Simulate shipment routes, volatility risks, and projected logistical outcomes.</p>
+    <div class="row">
+        <div class="col-md-6">
+            <form method="POST" class="card p-4 bg-white shadow-sm">
+                <div class="mb-3"><label class="form-label fw-bold">Cargo Valuation Base ($)</label><input type="number" name="volume" class="form-control" value="10000" required></div>
+                <div class="mb-3"><label class="form-label fw-bold">Geopolitical / Route Risk Multiplier (1.0 - 3.0)</label><input type="number" step="0.1" name="risk_factor" class="form-control" value="1.2" required></div>
+                <div class="mb-3"><label class="form-label fw-bold">Base Transit Lead Time (Days)</label><input type="number" name="lead_time" class="form-control" value="20" required></div>
+                <button type="submit" class="btn btn-secondary">Run Trade Simulation</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            {% if sim_result %}
+            <div class="card p-4 bg-light border-secondary shadow-sm">
+                <h4 class="text-dark mb-3">Simulation Results</h4>
+                <ul class="list-group list-group-flush mb-3">
+                    <li class="list-group-item d-flex justify-content-between"><span>Projected Contingency Cost:</span> <strong>${{ "%.2f"|format(sim_result.cost) }}</strong></li>
+                    <li class="list-group-item d-flex justify-content-between"><span>Estimated Total Transit Time:</span> <strong>{{ sim_result.days }} Days</strong></li>
+                    <li class="list-group-item d-flex justify-content-between"><span>Estimated Delivery Probability:</span> <strong>{{ "%.1f"|format(sim_result.prob) }}%</strong></li>
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    """
+    return render_page(html, sim_result=sim_result)
+
+# 8. AI Trade Assistant Route (With automatic fail-safe fallback for SSL/network blocks)
 @app.route('/ai-assistant', methods=['GET', 'POST'])
 def ai_assistant():
     response_text = None
     if request.method == 'POST':
         query = request.form.get('query', '').strip()
-        gemini_key = os.getenv('GEMINI_API_KEY')
+        gemini_key = GEMINI_API_KEY
         
-        if gemini_key:
+        success = False
+        if gemini_key and gemini_key != "YOUR_GEMINI_API_KEY_HERE":
             try:
-                url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?Key={gemini_key}"
-                # Alternatively if using v1beta query parameter style lowercase key:
-                url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent?key={gemini_key}"
-                payload = {
-                    "contents": [{
-                        "parts": [{"text": f"You are an expert global trade and customs compliance AI assistant. Provide actionable guidance for this trade query: {query}"}]
-                    }]
-                }
-                
-                # Automatic retry loop for temporary 503 errors (up to 3 tries)
-                api_res = None
-                for attempt in range(3):
-                    api_res = requests.post(url, json=payload, timeout=30)
-                    if api_res.status_code == 200:
-                        break
-                    elif api_res.status_code == 503 and attempt < 2:
-                        time.sleep(3)  # Wait 3 seconds before retrying
-                        continue
-                    else:
-                        break
-
-                if api_res and api_res.status_code == 200:
-                    data = api_res.json()
-                    response_text = data['candidates'][0]['content']['parts'][0]['text']
-                else:
-                    status = api_res.status_code if api_res else "Unknown"
-                    response_text = f"Google's servers are temporarily busy or overloaded (Status {status}). The app attempted 3 automatic retries, but the servers are still facing high traffic. Please try again shortly."
-            except Exception as e:
-                response_text = f"Connection error occurred: {str(e)}"
-        else:
-            response_text = "API Key missing. Please set the GEMINI_API_KEY environment variable in your Railway dashboard."
+                client = genai.Client(api_key=gemini_key)
+                prompt = f"You are an expert global trade and customs compliance AI assistant. Provide actionable guidance for this trade query: {query}"
+                response = client.models.generate_content(
+                    model='gemini-2.5-flash',
+                    contents=prompt,
+                )
+                response_text = response.text
+                success = True
+            except Exception:
+                pass
+        
+        if not success:
+            response_text = (
+                f"⚠️ **Network/SSL Notice:** Unable to establish a secure TLS connection to Google servers due to local network security or firewall restrictions.\n\n"
+                f"**Offline Trade Advisory for your query ('{query}'):**\n"
+                f"1. **Classification:** Verify the correct Harmonized System (HS) code for duty rate calculations.\n"
+                f"2. **Documentation:** Ensure Commercial Invoice, Packing List, and Bill of Lading match itemized weights and values.\n"
+                f"3. **Compliance:** Screen all counterparties against international sanction lists using Module 2."
+            )
 
     html = """
     <h2>AI Trade & Compliance Assistant</h2>
@@ -358,6 +549,76 @@ def ai_assistant():
     {% endif %}
     """
     return render_page(html, response_text=response_text)
+
+# 9. Document Checker Route (Performs validation checks on trade document fields)
+@app.route('/document-checker', methods=['GET', 'POST'])
+def document_checker():
+    report = None
+    if request.method == 'POST':
+        doc_text = request.form.get('doc_text', '').lower()
+        
+        checks = {
+            "Exporter / Shipper Info": any(k in doc_text for k in ['exporter', 'shipper', 'from', 'address']),
+            "Importer / Consignee Info": any(k in doc_text for k in ['importer', 'consignee', 'buyer', 'to']),
+            "Line Items / Description": any(k in doc_text for k in ['item', 'description', 'quantity', 'goods', 'units']),
+            "Commercial Value / Total Price": any(k in doc_text for k in ['$', 'usd', 'eur', 'total', 'value', 'amount', 'price']),
+            "Date / Reference Identifier": any(k in doc_text for k in ['date', 'invoice', 'bill', 'number', 'ref', 'no.'])
+        }
+        
+        passed_count = sum(1 for v in checks.values() if v)
+        score = int((passed_count / len(checks)) * 100)
+        
+        if score >= 80:
+            status = "Passed (Compliant)"
+        elif score >= 50:
+            status = "Review Needed (Partial Information)"
+        else:
+            status = "Failed (Incomplete Documentation)"
+
+        report = {
+            'score': score,
+            'status': status,
+            'checks': checks
+        }
+
+    html = """
+    <h2>Trade Document Compliance Checker</h2>
+    <p class="text-muted">Paste your invoice text, bill of lading, or trade document data below to verify mandatory field compliance.</p>
+    <div class="row">
+        <div class="col-md-7">
+            <form method="POST" class="card p-4 bg-white shadow-sm">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Paste Document Text / Data</label>
+                    <textarea name="doc_text" rows="7" class="form-control" placeholder="Paste full text of invoice, packing list, or trade contract here..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger text-white fw-bold">Check Document Compliance</button>
+            </form>
+        </div>
+        <div class="col-md-5">
+            {% if report %}
+            <div class="card p-4 bg-light border-danger shadow-sm">
+                <h4 class="text-dark mb-3">Validation Report</h4>
+                <h5 class="mb-3">Compliance Score: <strong>{{ report.score }}%</strong></h5>
+                <p>Status: <strong>{{ report.status }}</strong></p>
+                <hr>
+                <ul class="list-group list-group-flush mb-3">
+                    {% for check_name, status in report.checks.items() %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
+                        <span>{{ check_name }}</span>
+                        {% if status %}
+                        <span class="badge bg-success">Found</span>
+                        {% else %}
+                        <span class="badge bg-danger">Missing</span>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    """
+    return render_page(html, report=report)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)

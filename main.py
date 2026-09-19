@@ -3,7 +3,7 @@ import sqlite3
 import json
 import requests
 import io
-from flask import Flask, request, render_template_string, redirect, url_for, send_file
+from flask import Flask, request, render_template, render_template_string, redirect, url_for, send_file
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -61,7 +61,6 @@ def load_trade_data():
         print(f"Error loading JSON data: {e}")
         return {"exporters": [], "importers": []}
 
-# Single Base Template containing common layout for all 9 modules
 BASE_LAYOUT = """
 <!doctype html>
 <html lang="en">
@@ -195,7 +194,7 @@ def shipment_screening():
     """
     return render_page(html, records=records)
 
-# 3. Document Maker Route (ReportLab PDF Generation)
+# 3. Document Maker Route
 @app.route('/document-maker', methods=['GET', 'POST'])
 def document_maker():
     if request.method == 'POST':
@@ -395,59 +394,13 @@ def paper_management():
     """
     return render_page(html, papers=papers)
 
-# 6. Importers & Exporters Directory Route (Linked to package.json)
+# 6. Importers & Exporters Directory Route (Loads templates/directory.html)
 @app.route('/directory')
 def directory():
     trade_data = load_trade_data()
     exporters = trade_data.get("exporters", [])
     importers = trade_data.get("importers", [])
-
-    html = """
-    <h2>Importers & Exporters Directory</h2>
-    <p class="text-muted">Loaded directly from your package.json commercial data source.</p>
-    
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card p-4 bg-white mb-4">
-                <h4 class="text-primary mb-3">Exporters Directory ({{ exporters|length }})</h4>
-                <div style="max-height: 400px; overflow-y: auto;">
-                    <table class="table table-sm table-striped">
-                        <thead><tr><th>Company</th><th>Specialty</th><th>Flow</th></tr></thead>
-                        <tbody>
-                            {% for exp in exporters %}
-                            <tr>
-                                <td><strong>{{ exp.company_name }}</strong><br><small class="text-muted">{{ exp.contact_details }}</small></td>
-                                <td>{{ exp.specialty_expertise }}</td>
-                                <td><span class="badge bg-primary">{{ exp.trade_flow }}</span></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card p-4 bg-white mb-4">
-                <h4 class="text-success mb-3">Importers Directory ({{ importers|length }})</h4>
-                <div style="max-height: 400px; overflow-y: auto;">
-                    <table class="table table-sm table-striped">
-                        <thead><tr><th>Company</th><th>Specialty</th><th>Flow</th></tr></thead>
-                        <tbody>
-                            {% for imp in importers %}
-                            <tr>
-                                <td><strong>{{ imp.company_name }}</strong><br><small class="text-muted">{{ imp.contact_details }}</small></td>
-                                <td>{{ imp.specialty_expertise }}</td>
-                                <td class="text-wrap"><span class="badge bg-success">{{ imp.trade_flow }}</span></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    """
-    return render_page(html, exporters=exporters, importers=importers)
+    return render_template('directory.html', exporters=exporters, importers=importers)
 
 # 7. Trade Simulation Route
 @app.route('/simulation', methods=['GET', 'POST'])
@@ -499,7 +452,7 @@ def simulation():
     """
     return render_page(html, sim_result=sim_result)
 
-# 8. AI Trade Assistant Route (With automatic fail-safe fallback for SSL/network blocks)
+# 8. AI Trade Assistant Route
 @app.route('/ai-assistant', methods=['GET', 'POST'])
 def ai_assistant():
     response_text = None
@@ -550,7 +503,7 @@ def ai_assistant():
     """
     return render_page(html, response_text=response_text)
 
-# 9. Document Checker Route (Performs validation checks on trade document fields)
+# 9. Document Checker Route
 @app.route('/document-checker', methods=['GET', 'POST'])
 def document_checker():
     report = None

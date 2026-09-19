@@ -1,0 +1,808 @@
+{
+  "trade_pulse_directory": {
+    "exporters": [
+      {
+        "id": "EXP-001",
+        "company_name": "ADK LaBs (B2B Division)",
+        "contact_details": "adklabs.com.pk / Karachi",
+        "trade_flow": "Ships to: USA, EU, Middle East, Global",
+        "specialty_expertise": "Bulk pure perfume oils and custom fragrance blends for private label brands",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-002",
+        "company_name": "Divine Fragrances",
+        "contact_details": "Shahra-e-Liaquat, Karachi",
+        "trade_flow": "Ships to: Regional markets & Gulf States",
+        "specialty_expertise": "Aromatic chemical compounds and bulk perfume bases for manufacturers",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-003",
+        "company_name": "Surgicon (Pvt) Ltd.",
+        "contact_details": "info@surgicon.com.pk / Sialkot",
+        "trade_flow": "Ships to: UK, USA, Germany",
+        "specialty_expertise": "Surgical and medical diagnostic sets supplied to medical brands",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-004",
+        "company_name": "Forward Sports (Pvt) Ltd.",
+        "contact_details": "info@forwardsports.com / Sialkot",
+        "trade_flow": "Ships to: Germany, USA, Brazil",
+        "specialty_expertise": "OEM sports balls and gear for global sports brands",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-005",
+        "company_name": "Tijaratt International",
+        "contact_details": "info@tijarattinternational.com / Sialkot",
+        "trade_flow": "Ships to: UK, USA",
+        "specialty_expertise": "Fitness accessories and boxing gear supplied to fitness brands",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-006",
+        "company_name": "Moon Leather Products",
+        "contact_details": "info@moonleather.com / Karachi",
+        "trade_flow": "Ships to: EU, North America",
+        "specialty_expertise": "Bulk leather apparel for private-label clothing stores",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-007",
+        "company_name": "Pasha Leather Garments",
+        "contact_details": "info@pashaleather.com / Lahore",
+        "trade_flow": "Ships to: Italy, UK, USA",
+        "specialty_expertise": "Wholesale leather jackets for boutique retail brands",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-008",
+        "company_name": "Interloop Limited",
+        "contact_details": "info@interloop.com.pk / Faisalabad",
+        "trade_flow": "Ships to: USA, EU",
+        "specialty_expertise": "Seamless hosiery and garments for international retail labels",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-009",
+        "company_name": "Artistic Milliners (Pvt) Ltd.",
+        "contact_details": "info@artisticmilliners.com / Karachi",
+        "trade_flow": "Ships to: North America, Western Europe",
+        "specialty_expertise": "Wholesale denim fabrics and jeans for apparel brands",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-010",
+        "company_name": "Feroze1888 Mills Limited",
+        "contact_details": "info@feroze1888.com / Karachi",
+        "trade_flow": "Ships to: USA, Canada, EU",
+        "specialty_expertise": "Bulk terry towels and bath textiles for hospitality brands",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-011",
+        "company_name": "Chenab Limited",
+        "contact_details": "info@chenabgroup.com / Faisalabad",
+        "trade_flow": "Ships to: USA, Sweden, Australia",
+        "specialty_expertise": "Institutional bed linen and home textiles for retail distributors",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-012",
+        "company_name": "Shan Foods (Pvt) Ltd",
+        "contact_details": "info@shanfoods.com / Karachi",
+        "trade_flow": "Ships to: 60+ countries globally",
+        "specialty_expertise": "Bulk culinary spices and mixes for international wholesale distributors",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-013",
+        "company_name": "National Foods Limited",
+        "contact_details": "info@nfoods.com / Karachi",
+        "trade_flow": "Ships to: North America, Europe, Australia",
+        "specialty_expertise": "Packaged food products for ethnic supermarket distributors",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-014",
+        "company_name": "Shezan International",
+        "contact_details": "info@shezan.com.pk / Lahore",
+        "trade_flow": "Ships to: Afghanistan, Middle East",
+        "specialty_expertise": "Bulk fruit pulps and beverages for regional bottlers/distributors",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-015",
+        "company_name": "Matco Foods Limited",
+        "contact_details": "info@matcofoods.com / Karachi",
+        "trade_flow": "Ships to: Middle East, EU, North America",
+        "specialty_expertise": "Bulk organic rice glucose and ingredients for food brands",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-016",
+        "company_name": "Hilal Confectionery",
+        "contact_details": "info@hilalcandy.com / Karachi",
+        "trade_flow": "Ships to: Central Asia, Middle East",
+        "specialty_expertise": "Bulk confectionery and snacks for regional retail agents",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-017",
+        "company_name": "Royal Fans (Rafiq Eng.)",
+        "contact_details": "info@royalfans.com / Gujranwala",
+        "trade_flow": "Ships to: Iraq, Sudan, UAE",
+        "specialty_expertise": "Electric fans supplied to regional hardware wholesalers",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-018",
+        "company_name": "Tariq Glass Industries",
+        "contact_details": "info@tariqglass.com / Lahore",
+        "trade_flow": "Ships to: Middle East, Europe",
+        "specialty_expertise": "Bulk glassware and tableware supplied to commercial crockery traders",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-019",
+        "company_name": "Master Moltifoam",
+        "contact_details": "info@master.com.pk / Lahore",
+        "trade_flow": "Ships to: Afghanistan, Central Asia",
+        "specialty_expertise": "Foam blocks and bedding materials for regional furniture shops",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-020",
+        "company_name": "Moonlite (Pvt) Ltd",
+        "contact_details": "info@moonlite.com.pk / Lahore",
+        "trade_flow": "Ships to: Europe, Middle East",
+        "specialty_expertise": "Synthetic carpets and mats for interior design contractors",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-021",
+        "company_name": "Pak Persian Carpets",
+        "contact_details": "info@pakpersian.com / Lahore",
+        "trade_flow": "Ships to: USA, Germany",
+        "specialty_expertise": "Handmade oriental rugs supplied to foreign home-decor shops",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-022",
+        "company_name": "Sayyed Engineers Limited",
+        "contact_details": "sales@sayyed.com.pk / Lahore",
+        "trade_flow": "Ships to: Turkey, Egypt, Spain",
+        "specialty_expertise": "Bulk ballpoint pens supplied to office stationery distributors",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-023",
+        "company_name": "IF Zippers (Pvt.) Ltd.",
+        "contact_details": "info@ifzipperspakistan.com / Karachi",
+        "trade_flow": "Ships to: Portugal, UK, Turkey",
+        "specialty_expertise": "Garment fasteners and zippers supplied to clothing manufacturers",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-024",
+        "company_name": "Diamond Tyres Limited",
+        "contact_details": "info@diamondtyres.com / Lahore",
+        "trade_flow": "Ships to: Middle East, Africa",
+        "specialty_expertise": "Outer rubber tires supplied to regional vehicle part dealers",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-025",
+        "company_name": "Sazgar Engineering Works",
+        "contact_details": "info@sazgarautos.com / Lahore",
+        "trade_flow": "Ships to: African Nations",
+        "specialty_expertise": "Auto-rickshaws supplied to regional transport distributors",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-026",
+        "company_name": "Popular Food Industries",
+        "contact_details": "info@popularfood.pk / Karachi",
+        "trade_flow": "Ships to: East Africa, Gulf States",
+        "specialty_expertise": "Bulk food flour and pasta supplied to overseas grocers",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-027",
+        "company_name": "Nimir Industrial Chemicals",
+        "contact_details": "info@nimir.com.pk / Lahore",
+        "trade_flow": "Ships to: South Asia, Middle East",
+        "specialty_expertise": "Bulk soap noodles and chemical agents for local detergent brands",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-028",
+        "company_name": "Balochistan Minerals",
+        "contact_details": "info@balochistanminerals.com / Quetta",
+        "trade_flow": "Ships to: China, East Asia",
+        "specialty_expertise": "Raw mineral ores supplied to industrial processing plants",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-029",
+        "company_name": "Orient Ceramic Tiles",
+        "contact_details": "info@orientceramic.com / Lahore",
+        "trade_flow": "Ships to: Afghanistan, Central Asia",
+        "specialty_expertise": "Ceramic tiles supplied to construction material dealers",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-030",
+        "company_name": "Dadex Eternit Limited",
+        "contact_details": "info@dadex.com / Karachi",
+        "trade_flow": "Ships to: Middle East Projects",
+        "specialty_expertise": "Piping systems supplied to regional infrastructure contractors",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-031",
+        "company_name": "International Industries Ltd",
+        "contact_details": "iil@iil.com.pk / Karachi",
+        "trade_flow": "Ships to: North America, Middle East",
+        "specialty_expertise": "Steel tubes and piping supplied to international hardware traders",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-032",
+        "company_name": "Pak Oasis",
+        "contact_details": "info@pakoasis.com / Karachi",
+        "trade_flow": "Ships to: Middle East, East Africa",
+        "specialty_expertise": "Water treatment plants supplied to municipal contractors",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-033",
+        "company_name": "SelPak (Pvt) Limited",
+        "contact_details": "info@selpak.com.pk / Karachi",
+        "trade_flow": "Ships to: Afghanistan, Central Asia",
+        "specialty_expertise": "Hygiene paper products supplied to regional paper distributors",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-034",
+        "company_name": "Getz Pharma (Pvt) Ltd.",
+        "contact_details": "info@getzpharma.com / Karachi",
+        "trade_flow": "Ships to: Africa, Southeast Asia",
+        "specialty_expertise": "Pharmaceutical formulations supplied to medical distributors",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-035",
+        "company_name": "Sohail Surgical",
+        "contact_details": "info@sohailsurgical.com / Sialkot",
+        "trade_flow": "Ships to: Germany, France, Brazil",
+        "specialty_expertise": "Ophthalmic instruments supplied to medical supply companies",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-036",
+        "company_name": "Imperial Surgical Co.",
+        "contact_details": "info@imperialsurgical.com / Sialkot",
+        "trade_flow": "Ships to: Europe, Latin America",
+        "specialty_expertise": "Surgical tools supplied to international medical distributors",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-037",
+        "company_name": "Sialkot Fitness Equipments",
+        "contact_details": "info@sialkotfitness.com / Sialkot",
+        "trade_flow": "Ships to: USA, UK commercial gyms",
+        "specialty_expertise": "Gym machines supplied to fitness center outfitters",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-038",
+        "company_name": "Medipak Limited",
+        "contact_details": "info@medipak.com.pk / Lahore",
+        "trade_flow": "Ships to: Central Asia, Africa",
+        "specialty_expertise": "Medical infusion drips supplied to healthcare wholesalers",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-039",
+        "company_name": "Zubair 3D Glass Art",
+        "contact_details": "info@zubairglass.com / Hyderabad",
+        "trade_flow": "Ships to: Middle East luxury projects",
+        "specialty_expertise": "Crystal glass chandeliers supplied to interior designers",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-040",
+        "company_name": "Al-Hussany Marble & Granite",
+        "contact_details": "info@alhussanymarble.com / Karachi",
+        "trade_flow": "Ships to: UAE, Saudi Arabia",
+        "specialty_expertise": "Onyx marble slabs supplied to overseas stone-tile traders",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-041",
+        "company_name": "Sindh Hides & Skins",
+        "contact_details": "info@sindhhides.com / Karachi",
+        "trade_flow": "Ships to: Italy, China, Spain",
+        "specialty_expertise": "Treated leather hides supplied to foreign leather factories",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-042",
+        "company_name": "Bismillah Fish Net Industries",
+        "contact_details": "info@bismillahnets.com / Karachi",
+        "trade_flow": "Ships to: Middle East coastlines",
+        "specialty_expertise": "Fishing nets supplied to regional marine equipment dealers",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-043",
+        "company_name": "Rizwan Tent House & Canvas",
+        "contact_details": "info@rizwancanvas.com / Karachi",
+        "trade_flow": "Ships to: UN Relief Agencies, Africa",
+        "specialty_expertise": "Heavy-duty canvas tents supplied to humanitarian agencies",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-044",
+        "company_name": "Gujranwala Tools Die Co.",
+        "contact_details": "info@gtdc.org.pk / Gujranwala",
+        "trade_flow": "Ships to: Regional Engineering units",
+        "specialty_expertise": "Precision hand tools supplied to hardware trade houses",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-045",
+        "company_name": "Agriauto Industries",
+        "contact_details": "info@agriauto.com.pk / Karachi",
+        "trade_flow": "Ships to: Regional assembly plants",
+        "specialty_expertise": "Automotive parts supplied to secondary vehicle-part traders",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-046",
+        "company_name": "Atlas Honda Exports",
+        "contact_details": "info@atlashonda.com.pk / Lahore",
+        "trade_flow": "Ships to: South Asia, African hubs",
+        "specialty_expertise": "Motorcycle spares supplied to international parts dealers",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-047",
+        "company_name": "Kashmir Edible Oils",
+        "contact_details": "info@kashmiroil.com / Islamabad",
+        "trade_flow": "Ships to: Regional niche markets",
+        "specialty_expertise": "Cooking oil supplied to regional food commodity traders",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-048",
+        "company_name": "Pakistan Gum & Chemicals",
+        "contact_details": "info@pakistangum.com / Karachi",
+        "trade_flow": "Ships to: USA, Germany, Japan",
+        "specialty_expertise": "Guar gum derivatives supplied to food and paper manufacturers",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-049",
+        "company_name": "Jaffer Brothers (Agri)",
+        "contact_details": "info@jaffer.com / Lahore",
+        "trade_flow": "Ships to: Regional Agro Markets",
+        "specialty_expertise": "Hybrid seeds supplied to regional agricultural distributors",
+        "type": "B2B Exporter"
+      },
+      {
+        "id": "EXP-050",
+        "company_name": "Medtronic Pakistan (Export)",
+        "contact_details": "medtronic.com / Islamabad",
+        "trade_flow": "Ships to: South Asian health networks",
+        "specialty_expertise": "Specialized surgical hardware for medical re-sellers",
+        "type": "B2B Exporter"
+      }
+    ],
+    "importers": [
+      {
+        "id": "IMP-001",
+        "company_name": "Perfume Supply Co.",
+        "contact_details": "Dr. Ziauddin Ahmed Road, Karachi",
+        "trade_flow": "Sourced From: France, UAE, Europe",
+        "specialty_expertise": "Bulk imported perfumes, fragrance oils, and components supplied to local cosmetic shops",
+        "type": "Commercial Importer & B2B Wholesaler"
+      },
+      {
+        "id": "IMP-002",
+        "company_name": "Haroon Traders",
+        "contact_details": "Regal Chowk, Karachi",
+        "trade_flow": "Sourced From: Singapore, China",
+        "specialty_expertise": "Imported second-hand laptops and computer parts supplied to local IT shops",
+        "type": "Commercial Importer & B2B Wholesaler"
+      },
+      {
+        "id": "IMP-003",
+        "company_name": "Golden Traders",
+        "contact_details": "Bolton Market, Karachi",
+        "trade_flow": "Sourced From: China, Southeast Asia",
+        "specialty_expertise": "Imported plastic storage items and kitchenware supplied to general stores",
+        "type": "Commercial Importer & B2B Wholesaler"
+      },
+      {
+        "id": "IMP-004",
+        "company_name": "Samco Pakistan",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Germany, China",
+        "specialty_expertise": "Car care chemicals and detailing tools supplied to auto-detailing shops",
+        "type": "Commercial Importer & B2B Wholesaler"
+      },
+      {
+        "id": "IMP-005",
+        "company_name": "Mudaam B2B",
+        "contact_details": "Online B2B Platform",
+        "trade_flow": "Sourced From: China, Hong Kong",
+        "specialty_expertise": "Mobile accessories and tech gadgets supplied to mobile retail shops",
+        "type": "Commercial Importer & B2B Wholesaler"
+      },
+      {
+        "id": "IMP-006",
+        "company_name": "Saeed Ghani Wholesale",
+        "contact_details": "Bolton Market, Karachi",
+        "trade_flow": "Sourced From: France, Saudi Arabia",
+        "specialty_expertise": "Imported essential perfume oils and cosmetic bases supplied to local brands",
+        "type": "Commercial Importer & B2B Wholesaler"
+      },
+      {
+        "id": "IMP-007",
+        "company_name": "Hmv Trading Corporation",
+        "contact_details": "New Challi, Karachi",
+        "trade_flow": "Sourced From: Global Agro Hubs",
+        "specialty_expertise": "Bulk food grains and dry items supplied to grocery retail chains",
+        "type": "Commercial Importer & B2B Wholesaler"
+      },
+      {
+        "id": "IMP-008",
+        "company_name": "Equinox Trading (Pvt) Ltd",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Turkey",
+        "specialty_expertise": "Specialized consumer pharmaceuticals supplied to medical stores",
+        "type": "Commercial Importer & B2B Wholesaler"
+      },
+      {
+        "id": "IMP-009",
+        "company_name": "Al-Khair Distributors",
+        "contact_details": "Bahadurabad, Karachi",
+        "trade_flow": "Sourced From: Global Markets",
+        "specialty_expertise": "Confectionery and cosmetic lines supplied to retail shop networks",
+        "type": "Commercial Importer & B2B Wholesaler"
+      },
+      {
+        "id": "IMP-010",
+        "company_name": "HnH Enterprise",
+        "contact_details": "DHA, Karachi",
+        "trade_flow": "Sourced From: Global FMCG Suppliers",
+        "specialty_expertise": "Fast-moving consumer goods supplied to independent grocery stores",
+        "type": "Commercial Importer & B2B Wholesaler"
+      },
+      {
+        "id": "IMP-011",
+        "company_name": "Bolton Market Wholesale Bazar",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: China, UAE",
+        "specialty_expertise": "Imported novelty goods and toys supplied to toy shop owners",
+        "type": "Commercial Importer & B2B Wholesaler"
+      },
+      {
+        "id": "IMP-012",
+        "company_name": "JodiaBazar Online Hub",
+        "contact_details": "Jodia Bazaar, Karachi",
+        "trade_flow": "Sourced From: Middle East, Asia",
+        "specialty_expertise": "Imported baking ingredients and teas supplied to local bakers/shops",
+        "type": "Commercial Importer & B2B Wholesaler"
+      },
+      {
+        "id": "IMP-013",
+        "company_name": "Burque Corporation",
+        "contact_details": "Karachi (Nationwide network)",
+        "trade_flow": "Sourced From: Multinational Brands",
+        "specialty_expertise": "Consumer care products distributed across 50,000+ retail outlets",
+        "type": "Master Distributor & Importer"
+      },
+      {
+        "id": "IMP-014",
+        "company_name": "Sami Impex",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: International Suppliers",
+        "specialty_expertise": "Household and personal care goods supplied to multi-brand shops",
+        "type": "Commercial Importer & B2B Wholesaler"
+      },
+      {
+        "id": "IMP-015",
+        "company_name": "Metro Cash & Carry (B2B)",
+        "contact_details": "Lahore / Karachi",
+        "trade_flow": "Sourced From: Europe, Turkey, Asia",
+        "specialty_expertise": "Bulk imported groceries and electronics supplied to registered traders",
+        "type": "Wholesale Importer"
+      },
+      {
+        "id": "IMP-016",
+        "company_name": "Imtiaz Wholesale Hub",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Thailand, UAE, Malaysia",
+        "specialty_expertise": "FMCG products supplied in bulk to smaller retail shop owners",
+        "type": "Wholesale Importer"
+      },
+      {
+        "id": "IMP-017",
+        "company_name": "Carrefour B2B Supply",
+        "contact_details": "Lahore",
+        "trade_flow": "Sourced From: France, UAE",
+        "specialty_expertise": "Personal care and household goods supplied to corporate buyers",
+        "type": "Wholesale Importer"
+      },
+      {
+        "id": "IMP-018",
+        "company_name": "Al-Fatah Supply Division",
+        "contact_details": "Lahore",
+        "trade_flow": "Sourced From: Italy, UK, Thailand",
+        "specialty_expertise": "Imported chocolates and food items supplied to regional marts",
+        "type": "Wholesale Importer"
+      },
+      {
+        "id": "IMP-019",
+        "company_name": "Decathlon B2B Supply",
+        "contact_details": "Lahore",
+        "trade_flow": "Sourced From: France, Vietnam",
+        "specialty_expertise": "Sports gear supplied to institutional sports clubs and retailers",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-020",
+        "company_name": "Medtronic Pakistan (Import)",
+        "contact_details": "Islamabad",
+        "trade_flow": "Sourced From: USA, Ireland",
+        "specialty_expertise": "Pacemakers and surgical tools supplied to hospital networks",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-021",
+        "company_name": "Siemens Healthcare (Import)",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Germany, USA",
+        "specialty_expertise": "Medical imaging units supplied to diagnostic clinics",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-022",
+        "company_name": "Abbott Laboratories (Import)",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: USA, Singapore",
+        "specialty_expertise": "Diagnostic test kits supplied to clinical laboratories",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-023",
+        "company_name": "Philips Pakistan (Import)",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Netherlands, China",
+        "specialty_expertise": "Medical lighting and components supplied to healthcare suppliers",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-024",
+        "company_name": "HP Pakistan Sourcing",
+        "contact_details": "Islamabad",
+        "trade_flow": "Sourced From: Singapore, China",
+        "specialty_expertise": "Enterprise IT hardware supplied to computer reseller networks",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-025",
+        "company_name": "Samsung Electronics (Import)",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: South Korea, Vietnam",
+        "specialty_expertise": "Smartphone display assemblies supplied to repair shops and brands",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-026",
+        "company_name": "Gillette Pakistan Sourcing",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Poland, Germany",
+        "specialty_expertise": "Shaving razors and blades supplied to general merchandise stores",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-027",
+        "company_name": "Reckitt Benckiser Sourcing",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: UK, Netherlands",
+        "specialty_expertise": "Antiseptic chemical goods supplied to pharmacy distributors",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-028",
+        "company_name": "Unilever Sourcing Division",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Indonesia, Europe",
+        "specialty_expertise": "Surfactant bases and raw inputs supplied to local formulators",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-029",
+        "company_name": "Bayer Pakistan Sourcing",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Germany, USA",
+        "specialty_expertise": "Public health chemicals supplied to regional pest-control dealers",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-030",
+        "company_name": "Syngenta Sourcing Unit",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Switzerland, USA",
+        "specialty_expertise": "Crop protection formulas supplied to agricultural seed merchants",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-031",
+        "company_name": "Novartis Pharma Procurement",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Switzerland, Slovenia",
+        "specialty_expertise": "Specialized medicines supplied to pharmaceutical distributors",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-032",
+        "company_name": "Sanofi-Aventis Sourcing",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: France, Italy",
+        "specialty_expertise": "Vaccine vials and medical monitors supplied to health stockists",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-033",
+        "company_name": "Pfizer Pakistan Procurement",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: USA, Belgium",
+        "specialty_expertise": "Hospital-grade antibiotics supplied to medical distributors",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-034",
+        "company_name": "Continental Biscuits Sourcing",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Ivory Coast, France",
+        "specialty_expertise": "Baking ingredients supplied to commercial baking enterprises",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-035",
+        "company_name": "English Biscuit Sourcing",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Malaysia, Indonesia",
+        "specialty_expertise": "Food-grade shortening and baking fats supplied to food brands",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-036",
+        "company_name": "Ismail Industries Sourcing",
+        "contact_details": "Hub",
+        "trade_flow": "Sourced From: Malaysia, Ghana",
+        "specialty_expertise": "Cocoa mass and barrier films supplied to confectioners",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-037",
+        "company_name": "Nestlé Pakistan Sourcing",
+        "contact_details": "Lahore",
+        "trade_flow": "Sourced From: Switzerland, Singapore",
+        "specialty_expertise": "Specialized food additives supplied to local food processors",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-038",
+        "company_name": "Attock Petroleum Sourcing",
+        "contact_details": "Rawalpindi",
+        "trade_flow": "Sourced From: Middle East",
+        "specialty_expertise": "High-performance lubricants supplied to automotive part dealers",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-039",
+        "company_name": "Shell Pakistan Sourcing",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Singapore, UAE",
+        "specialty_expertise": "Synthetic oils and lubricants supplied to service stations",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-040",
+        "company_name": "Cnergyico PK Sourcing",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Middle East, Russia",
+        "specialty_expertise": "Solvent chemicals supplied to industrial processing units",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-041",
+        "company_name": "PARCO Sourcing Division",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Abu Dhabi, Kuwait",
+        "specialty_expertise": "Petroleum catalysts supplied to regional energy traders",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-042",
+        "company_name": "K-Electric Sourcing Unit",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Germany, South Korea",
+        "specialty_expertise": "Grid maintenance and testing gear supplied to electrical contractors",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-043",
+        "company_name": "PTCL Sourcing Division",
+        "contact_details": "Islamabad",
+        "trade_flow": "Sourced From: China, USA",
+        "specialty_expertise": "Telecom switches and routers supplied to IT infrastructure dealers",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-044",
+        "company_name": "Telenor Procurement Unit",
+        "contact_details": "Islamabad",
+        "trade_flow": "Sourced From: Sweden, Finland",
+        "specialty_expertise": "Cellular network maintenance hardware supplied to tech partners",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-045",
+        "company_name": "Zong CMPak Sourcing",
+        "contact_details": "Islamabad",
+        "trade_flow": "Sourced From: China",
+        "specialty_expertise": "Wireless signal amplifiers supplied to telecom contractors",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-046",
+        "company_name": "Jazz Telecommunications",
+        "contact_details": "Islamabad",
+        "trade_flow": "Sourced From: USA, Israel",
+        "specialty_expertise": "Cybersecurity hardware supplied to corporate IT re-sellers",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-047",
+        "company_name": "Nishat Mills Sourcing",
+        "contact_details": "Lahore",
+        "trade_flow": "Sourced From: USA, Australia",
+        "specialty_expertise": "Textile loom parts supplied to weaving accessories merchants",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-048",
+        "company_name": "Gul Ahmed Procurement",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Switzerland, Germany",
+        "specialty_expertise": "Digital textile printing heads supplied to printing workshops",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-049",
+        "company_name": "Al-Karam Textile Sourcing",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Japan, South Korea",
+        "specialty_expertise": "Embroidery machinery parts supplied to garment manufacturers",
+        "type": "Commercial Importer"
+      },
+      {
+        "id": "IMP-050",
+        "company_name": "Loads Auto Parts Importers",
+        "contact_details": "Karachi",
+        "trade_flow": "Sourced From: Taiwan, South Korea",
+        "specialty_expertise": "Automotive oil seals and bearings supplied to vehicle spare shops",
+        "type": "Commercial Importer & B2B Wholesaler"
+      }
+    ]
+  }
+}
